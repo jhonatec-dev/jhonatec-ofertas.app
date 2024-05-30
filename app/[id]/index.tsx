@@ -1,9 +1,12 @@
+import Button from "@/components/Button";
+import ListLinks from "@/components/ListLinks";
 import VideoModal from "@/components/VideoModal";
 import { IItem } from "@/interfaces/IScrapping";
+import { MaterialIcons } from "@expo/vector-icons";
 import axios, { AxiosError } from "axios";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { Button, Image, StatusBar, StyleSheet, Text, View } from "react-native";
+import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
 
 const API_URL = "http://192.168.1.67:3001/scrapping/item";
 
@@ -65,26 +68,27 @@ export default function ItemDetails() {
       <Text>{item.idCategory.name}</Text>
       <View style={styles.row}>
         <Image source={{ uri: item.image }} style={styles.image} />
-        <View>
-          <Text style={styles.shrink}>{item.description}</Text>
+        <View
+          style={{ flexShrink: 1, gap: 5, justifyContent: "space-between" }}
+        >
+          <Text>{item.description}</Text>
           {item.urlVideo && (
             <Button
-              title='Ver video'
+              title='Dicas de compra'
               onPress={() => setShowVideo(true)}
-              color='#841584'
-              
+              icon={<MaterialIcons name='play-arrow' size={24} color='white' />}
             />
           )}
         </View>
       </View>
+      <ListLinks items={item.links} />
       <VideoModal
         isVisible={showVideo}
         onClose={() => setShowVideo(false)}
         videoUrl={item.urlVideo}
       />
-      <Text>Item Details {JSON.stringify(item)}</Text>
 
-      <StatusBar barStyle='dark-content' />
+      <StatusBar hidden />
     </View>
   );
 }
@@ -97,12 +101,12 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    // flexWrap: "wrap"
+    // flexWrap: "wrap",
     gap: 5,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     resizeMode: "contain",
     borderRadius: 5,
   },

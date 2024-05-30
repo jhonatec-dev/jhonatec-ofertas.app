@@ -15,10 +15,11 @@ export default function CardItem({ item }: IProps) {
           id: item._id,
         },
       }}
+      
     >
       <View style={styles.container}>
         <Image source={{ uri: item.image }} style={styles.image} />
-        <View>
+        <View style={{flexShrink: 1}}>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.description}>{item.description}</Text>
         </View>
@@ -34,6 +35,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     gap: 4,
+    backgroundColor: "#fff",
+    borderRadius: 10,
   },
   image: {
     width: 100,
@@ -44,14 +47,10 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
-    // flex: 1,
-    flexShrink: 1,
   },
   description: {
     fontSize: 12,
-    // flex: 1,
-    flexShrink: 1,
   },
 });

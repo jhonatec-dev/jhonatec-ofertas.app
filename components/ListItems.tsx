@@ -1,5 +1,5 @@
 import { IItem } from "@/interfaces/IScrapping";
-import { FlatList, SafeAreaView, StyleSheet } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
 import CardItem from "./CardItem";
 
 interface IProps {
@@ -14,6 +14,8 @@ export default function ListItems({ items }: IProps) {
         data={items}
         renderItem={({ item }: { item: IItem }) => <CardItem item={item} />}
         keyExtractor={() => Math.random().toString()}
+        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+        onLayout={() => console.log("onLayout")}
       />
     </SafeAreaView>
   );
